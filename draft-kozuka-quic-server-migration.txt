@@ -14,7 +14,7 @@ Expires: 2 July 2026
 Abstract
 
    This document specifies an extension that reverses this role: the
-   server initiates migration.
+   server initiates connection migration.
 
 About This Document
 
