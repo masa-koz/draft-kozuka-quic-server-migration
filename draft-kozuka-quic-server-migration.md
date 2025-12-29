@@ -55,8 +55,8 @@ informative:
 
 --- abstract
 
-This document specifies an extension that reverses this role: the server initiates
-connection migration.
+This document specifies an extension of QUIC that allows the server to initiate connection
+migration.
 
 
 --- middle
