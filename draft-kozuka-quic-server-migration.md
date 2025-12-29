@@ -21,7 +21,7 @@
 ###
 title: "QUIC Extension for Server-Initiated Connection Migration"
 abbrev: "QUIC Server Migration"
-category: info
+category: std
 
 docname: draft-todo-yourname-protocol-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
