@@ -19,8 +19,8 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "QUIC Extension for Server-Initiated Connection Migration"
+abbrev: "QUIC Server Migration"
 category: info
 
 docname: draft-todo-yourname-protocol-latest
