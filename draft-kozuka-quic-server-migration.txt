@@ -101,11 +101,18 @@ Table of Contents
 
 3.  Motivation
 
-   A key scenario is: - The server is initially behind a NAT and cannot
-   accept direct connections. - The client has a public IP address. -
-   The server first establishes the QUIC connection via a relay server.
-   - Immediately after the handshake, the server migrates the connection
-   to the client’s public address, reducing latency.
+   A key scenario is:
+
+   *  The server is initially behind a NAT and cannot accept direct
+      connections.
+
+   *  The client has a public IP address.
+
+   *  The server first establishes the QUIC connection via a relay
+      server.
+
+   *  Immediately after the handshake, the server migrates the
+      connection to the client’s public address, reducing latency.
 
    This specification does not define how the server obtains the public
    address of the client.  Possible methods include application-level

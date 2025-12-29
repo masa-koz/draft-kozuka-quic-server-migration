@@ -1219,14 +1219,24 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-motivation">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-motivation" class="section-name selfRef">Motivation</a>
       </h2>
-<p id="section-3-1">A key scenario is:
-- The server is initially behind a NAT and cannot accept direct connections.
-- The client has a public IP address.
-- The server first establishes the QUIC connection via a relay server.
-- Immediately after the handshake, the server migrates the connection to the client’s public address, reducing latency.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">This specification does not define how the server obtains the public address of the client.
+<p id="section-3-1">A key scenario is:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3-2.1">
+          <p id="section-3-2.1.1">The server is initially behind a NAT and cannot accept direct connections.<a href="#section-3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-2.2">
+          <p id="section-3-2.2.1">The client has a public IP address.<a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-2.3">
+          <p id="section-3-2.3.1">The server first establishes the QUIC connection via a relay server.<a href="#section-3-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-3-2.4">
+          <p id="section-3-2.4.1">Immediately after the handshake, the server migrates the connection to the client’s public address, reducing latency.<a href="#section-3-2.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-3-3">This specification does not define how the server obtains the public address of the client.
 Possible methods include application-level signaling or external mechanisms, but these are out
-of scope.<a href="#section-3-2" class="pilcrow">¶</a></p>
+of scope.<a href="#section-3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="scope">
