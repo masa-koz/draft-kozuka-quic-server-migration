@@ -62,9 +62,9 @@ This document specifies an extension that reverses this role: the server initiat
 
 # Introduction
 
-RFC 9000 defines connection migration as a mechanism initiated by the client to change its IP 
-address or network path without disrupting the QUIC connection. This mechanism is based on the 
-assumption that a client may be behind a NAT and a server has a public address. However, 
+RFC 9000 defines connection migration as a mechanism initiated by the client to change its IP
+address or network path without disrupting the QUIC connection. This mechanism is based on the
+assumption that a client may be behind a NAT and a server has a public address. However,
 there is a reversed situation where a client has a public address and a server is behind a NAT.
 This document specifies an extension that reverses this role: the server initiates migration.
 
@@ -81,7 +81,7 @@ A key scenario is:
 - Immediately after the handshake, the server migrates the connection to the client’s public address, reducing latency.
 
 This specification does not define how the server obtains the public address of the client.
-Possible methods include application-level signaling or external mechanisms, but these are out 
+Possible methods include application-level signaling or external mechanisms, but these are out
 of scope.
 
 # Scope
@@ -94,9 +94,9 @@ of scope.
 
 allow_server_migration (0x3e764478):
 
-Clients advertise their support of this extension by sending the allow_server_migration 
+Clients advertise their support of this extension by sending the allow_server_migration
 (0x3e764478) transport parameter ({{Section 7.4 of QUIC-TRANSPORT}}) with an empty value.
-Sending this transport parameter signals to the server that the client will accept the 
+Sending this transport parameter signals to the server that the client will accept the
 server-initiated migration.
 
 Servers also send this parameter with an empty value. The server informs the client that
@@ -105,7 +105,7 @@ it will initiate the connection migration by sending this parameter.
 When this extension is negotiated, the server-initiated migration is only permitted and
 the client-initiated migration is prohibited.
 
-An implementation that understands this transport parameter MUST treat the receipt of a 
+An implementation that understands this transport parameter MUST treat the receipt of a
 non-empty value as a connection error of type TRANSPORT_PARAMETER_ERROR.
 
 Endpoints MUST NOT remember the value of this extension for 0-RTT.
