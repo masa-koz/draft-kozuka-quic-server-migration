@@ -2,34 +2,37 @@
 
 
 
-WG Working Group                                              Y. N. Here
-Internet-Draft                                    Your Organization Here
+QUIC                                                           M. Kozuka
+Internet-Draft                                        Okayama University
 Intended status: Standards Track                        29 December 2025
 Expires: 2 July 2026
 
 
         QUIC Extension for Server-Initiated Connection Migration
-                  draft-todo-yourname-protocol-latest
+               draft-kozuka-quic-server-migration-latest
 
 Abstract
 
-   TODO Abstract
+   This document specifies an extension that reverses this role: the
+   server initiates migration.
 
 About This Document
 
    This note is to be removed before publishing as an RFC.
 
-   The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-todo-yourname-
-   protocol/.
+   The latest revision of this draft can be found at https://masa-
+   koz.github.io/draft-kozuka-quic-server-migration/draft-kozuka-quic-
+   server-migration.html.  Status information for this document may be
+   found at https://datatracker.ietf.org/doc/draft-kozuka-quic-server-
+   migration/.
 
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
+   Discussion of this document takes place on the QUIC Working Group
+   mailing list (mailto:quic@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/quic/.  Subscribe at
+   https://www.ietf.org/mailman/listinfo/quic/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
+   https://github.com/masa-koz/draft-kozuka-quic-server-migration.
 
 Status of This Memo
 
@@ -66,15 +69,27 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Security Considerations
-   4.  IANA Considerations
-   5.  Normative References
+   3.  Motivation
+   4.  Scope
+   5.  Negotiating Extension Use
+   6.  Connection Migration Procedure
+   7.  Security Considerations
+   8.  IANA Considerations
+     8.1.  QUIC Transport Parameter
+   9.  Normative References
    Acknowledgments
+   Questions
    Author's Address
 
 1.  Introduction
 
-   TODO Introduction
+   RFC 9000 defines connection migration as a mechanism initiated by the
+   client to change its IP address or network path without disrupting
+   the QUIC connection.  This mechanism is based on the assumption that
+   a client may be behind a NAT and a server has a public address.
+   However, there is a reversed situation where a client has a public
+   address and a server is behind a NAT.  This document specifies an
+   extension that reverses this role: the server initiates migration.
 
 2.  Conventions and Definitions
 
@@ -84,15 +99,87 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  Security Considerations
+3.  Motivation
+
+   A key scenario is: - The server is initially behind a NAT and cannot
+   accept direct connections. - The client has a public IP address. -
+   The server first establishes the QUIC connection via a relay server.
+   - Immediately after the handshake, the server migrates the connection
+   to the client’s public address, reducing latency.
+
+   This specification does not define how the server obtains the public
+   address of the client.  Possible methods include application-level
+   signaling or external mechanisms, but these are out of scope.
+
+4.  Scope
+
+   *  Reverse migration roles defined in RFC 9000.
+
+   *  Maintain QUIC security guarantees.
+
+   *  No new NAT traversal mechanism.
+
+5.  Negotiating Extension Use
+
+   allow_server_migration (0x3e764478):
+
+   Clients advertise their support of this extension by sending the
+   allow_server_migration (0x3e764478) transport parameter (Section 7.4
+   of [QUIC-TRANSPORT]) with an empty value.  Sending this transport
+   parameter signals to the server that the client will accept the
+   server-initiated migration.
+
+   Servers also send this parameter with an empty value.  The server
+   informs the client that it will initiate the connection migration by
+   sending this parameter.
+
+   When this extension is negotiated, the server-initiated migration is
+   only permitted and the client-initiated migration is prohibited.
+
+   An implementation that understands this transport parameter MUST
+   treat the receipt of a non-empty value as a connection error of type
+   TRANSPORT_PARAMETER_ERROR.
+
+   Endpoints MUST NOT remember the value of this extension for 0-RTT.
+
+6.  Connection Migration Procedure
+
+   The connection migration procedure is the same as (Section 9 of
+   [QUIC-TRANSPORT]) except that the roles between the client and the
+   server are reversed.
+
+7.  Security Considerations
 
    TODO Security
 
-4.  IANA Considerations
+8.  IANA Considerations
 
-   This document has no IANA actions.
+8.1.  QUIC Transport Parameter
 
-5.  Normative References
+   This document registers the allow_server_migration transport
+   parameter in the "QUIC Transport Parameters" registry established in
+   Section 22.3 of [QUIC-TRANSPORT].  The following fields are
+   registered:
+
+   Value:  0x3e764478
+
+   Parameter Name:  allow_server_migration
+
+   Status:  Provisional
+
+   Specification:  This document
+
+   Change Controller:  IETF (iesg@ietf.org)
+
+   Contact:  Masahiro Kozuka (kozuka@okayama-u.ac.jp)
+
+9.  Normative References
+
+   [QUIC-TRANSPORT]
+              Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
+              Multiplexed and Secure Transport", RFC 9000,
+              DOI 10.17487/RFC9000, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9000>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -107,8 +194,16 @@ Acknowledgments
 
    TODO acknowledge.
 
+Questions
+
+   *  Sould we extend this extension to allow both clients and servers
+      to initiate connection migration?
+
+   *  Any new security conserations from allowing servers to initiate
+      connection migration?
+
 Author's Address
 
-   Your Name Here
-   Your Organization Here
-   Email: your.email@example.com
+   Masahiro Kozuka
+   Okayama University
+   Email: kozuka@okayama-u.ac.jp
