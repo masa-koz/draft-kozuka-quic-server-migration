@@ -75,6 +75,7 @@ This document specifies an extension that reverses this role: the server initiat
 # Motivation
 
 A key scenario is:
+
 - The server is initially behind a NAT and cannot accept direct connections.
 - The client has a public IP address.
 - The server first establishes the QUIC connection via a relay server.
