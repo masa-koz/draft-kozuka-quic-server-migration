@@ -55,7 +55,8 @@ informative:
 
 --- abstract
 
-This document specifies an extension that reverses this role: the server initiates migration.
+This document specifies an extension that reverses this role: the server initiates
+connection migration.
 
 
 --- middle
