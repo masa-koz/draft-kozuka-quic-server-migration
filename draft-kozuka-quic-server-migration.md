@@ -31,9 +31,27 @@ author:
 
 normative:
 
-informative:
+normative:
 
-...
+  QUIC-TRANSPORT:
+    title: "QUIC: A UDP-Based Multiplexed and Secure Transport"
+    date: 2021-05
+    seriesinfo:
+      RFC: 9000
+      DOI: 10.17487/RFC9000
+    author:
+      -
+        ins: J. Iyengar
+        name: Jana Iyengar
+        org: Fastly
+        role: editor
+      -
+        ins: M. Thomson
+        name: Martin Thomson
+        org: Mozilla
+        role: editor
+
+informative:
 
 --- abstract
 
